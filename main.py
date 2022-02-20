@@ -10,6 +10,7 @@ from utilities import preprocess_images, preprocess_maps, preprocess_fixmaps, po
 from models import sam_vgg, sam_resnet, kl_divergence, correlation_coefficient, nss
 
 
+
 def generator(b_s, phase_gen='train'):
     if phase_gen == 'train':
         images = [imgs_train_path + f for f in os.listdir(imgs_train_path) if f.endswith(('.jpg', '.jpeg', '.png'))]
@@ -105,7 +106,7 @@ if __name__ == '__main__':
                 m.load_weights('weights/sam-vgg_salicon_weights.pkl')
             elif version == 1:
                 print("Loading SAM-ResNet weights")
-                m.load_weights('weights/sam-resnet_salicon_weights.pkl')
+                m.load_weights('weights/sam-resnet_salicon2017_weights.pkl')
 
             print("Predicting saliency maps for " + imgs_test_path)
             predictions = m.predict_generator(generator_test(b_s=b_s, imgs_test_path=imgs_test_path), nb_imgs_test)[0]

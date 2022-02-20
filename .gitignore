@@ -1,0 +1,5 @@
+*.pyc
+/predictions
+/inputs
+env/
+weights/
