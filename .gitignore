@@ -3,3 +3,5 @@
 /inputs
 env/
 weights/
+*.bak
+models/
