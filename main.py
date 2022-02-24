@@ -1,8 +1,8 @@
-from __future__ import division
-from keras.optimizers import RMSprop
-from keras.callbacks import EarlyStopping, ModelCheckpoint, LearningRateScheduler
-from keras.layers import Input
-from keras.models import Model
+import tensorflow as tf
+from tensorflow.keras.optimizers import RMSprop
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, LearningRateScheduler
+from tensorflow.keras.layers import Input
+from tensorflow.keras.models import Model
 import os, cv2, sys
 import numpy as np
 from config import *
@@ -53,6 +53,7 @@ if __name__ == '__main__':
         raise NotImplementedError
     else:
         phase = sys.argv[1]
+
         x = Input((3, shape_r, shape_c))
         x_maps = Input((nb_gaussian, shape_r_gt, shape_c_gt))
 
@@ -108,7 +109,10 @@ if __name__ == '__main__':
                 print("Loading SAM-ResNet weights")
                 m.load_weights('weights/sam-resnet_salicon2017_weights.pkl')
 
-            print("Predicting saliency maps for " + imgs_test_path)
+            # save model as tensorFlow file
+            #m.save('./models/sam-resnet_salicon2017_weights')
+
+            print(("Predicting saliency maps for " + imgs_test_path))
             predictions = m.predict_generator(generator_test(b_s=b_s, imgs_test_path=imgs_test_path), nb_imgs_test)[0]
 
 
